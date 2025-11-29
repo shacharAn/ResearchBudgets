@@ -18,29 +18,5 @@ namespace RuppinResearchBudget.DAL
             con.Open();
             return con;
         }
-
-        protected SqlCommand CreateCommandWithStoredProcedureGeneral(
-            string spName,
-            SqlConnection con,
-            Dictionary<string, object> paramDic)
-        {
-            SqlCommand cmd = new SqlCommand
-            {
-                Connection = con,
-                CommandText = spName,
-                CommandTimeout = 10,
-                CommandType = CommandType.StoredProcedure
-            };
-
-            if (paramDic != null)
-            {
-                foreach (KeyValuePair<string, object> param in paramDic)
-                {
-                    cmd.Parameters.AddWithValue(param.Key, param.Value);
-                }
-            }
-
-            return cmd;
-        }
     }
 }

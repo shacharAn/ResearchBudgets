@@ -30,6 +30,10 @@ namespace RuppinResearchBudget.DAL
                         result.EndDate = reader["EndDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["EndDate"];
                         result.CreatedAt = (DateTime)reader["CreatedAt"];
                     }
+                    else
+                    {
+                        throw new Exception("לא נמצאו נתוני מחקר עבור המזהה שנשלח");
+                    }
 
                     // סך כל ההוצאות המאושרות
                     if (reader.NextResult() && reader.Read() && reader["TotalApprovedExpenses"] != DBNull.Value)

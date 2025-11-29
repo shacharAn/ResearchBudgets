@@ -14,7 +14,7 @@ namespace RuppinResearchBudget.BL
             _researchesDal = new ResearchesDal();
         }
 
-        public Researches CreateResearch(Researches research)
+        public Researches? CreateResearch(Researches research)
         {
             if (string.IsNullOrWhiteSpace(research.ResearchCode))
                 throw new ArgumentException("קוד מחקר הוא שדה חובה");
@@ -28,16 +28,26 @@ namespace RuppinResearchBudget.BL
             if (research.EndDate.HasValue && research.EndDate < research.StartDate)
                 throw new ArgumentException("תאריך סיום לא יכול להיות לפני תאריך התחלה");
 
-            return _researchesDal.CreateResearch(research);
+            var created = _researchesDal.CreateResearch(research);
+            if (created == null)
+                throw new Exception("יצירת המחקר נכשלה במסד הנתונים");
+
+            return created;
         }
 
-        public Researches GetResearchById(int researchId)
+
+        public Researches? GetResearchById(int researchId)
         {
             if (researchId <= 0)
                 throw new ArgumentException("מספר מחקר אינו חוקי");
 
-            return _researchesDal.GetResearchById(researchId);
+            var research = _researchesDal.GetResearchById(researchId);
+            if (research == null)
+                throw new Exception("המחקר לא נמצא");
+
+            return research;
         }
+
 
         public List<Researches> GetResearchesByUser(string idNumber)
         {

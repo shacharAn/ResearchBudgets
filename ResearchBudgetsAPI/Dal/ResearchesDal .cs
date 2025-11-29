@@ -8,7 +8,7 @@ namespace RuppinResearchBudget.DAL
 {
     public class ResearchesDal : DBServices
     {
-        public Researches CreateResearch(Researches research)
+        public Researches? CreateResearch(Researches research)
         {
             using (SqlConnection conn = connect("DefaultConnection"))
             using (SqlCommand cmd = new SqlCommand("spCreateResearch", conn))
@@ -38,7 +38,7 @@ namespace RuppinResearchBudget.DAL
             }
         }
 
-        public Researches GetResearchById(int researchId)
+        public Researches? GetResearchById(int researchId)
         {
             using (SqlConnection conn = connect("DefaultConnection"))
             using (SqlCommand cmd = new SqlCommand("spGetResearchById", conn))

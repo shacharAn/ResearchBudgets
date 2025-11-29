@@ -23,8 +23,12 @@ namespace RuppinResearchBudget.DAL
                     string.IsNullOrEmpty(file.ContentType) ? (object)DBNull.Value : file.ContentType);
                 cmd.Parameters.AddWithValue("@UploadedById", file.UploadedById);
 
-                object result = cmd.ExecuteScalar(); // NewFileId
+                object result = cmd.ExecuteScalar();
+                if (result == null || result == DBNull.Value)
+                    throw new Exception("שגיאה בשמירת הקובץ במסד הנתונים");
+
                 return Convert.ToInt32(result);
+
             }
         }
     }

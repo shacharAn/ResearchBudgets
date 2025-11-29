@@ -26,7 +26,11 @@ namespace RuppinResearchBudget.DAL
                     request.FileId.HasValue ? (object)request.FileId.Value : DBNull.Value);
 
                 object result = cmd.ExecuteScalar();
+                if (result == null || result == DBNull.Value)
+                    throw new Exception("שגיאה ביצירת בקשת התשלום במסד הנתונים");
+
                 return Convert.ToInt32(result);
+
             }
         }
 

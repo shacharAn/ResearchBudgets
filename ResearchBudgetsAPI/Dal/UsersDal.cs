@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using RuppinResearchBudget.DAL;
 using RuppinResearchBudget.Models;
 
-namespace RuppinResearchBudget.Dal
+namespace RuppinResearchBudget.DAL
 {
     public class UsersDal : DBServices
     {

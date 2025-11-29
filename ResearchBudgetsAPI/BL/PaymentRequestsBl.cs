@@ -28,7 +28,11 @@ namespace RuppinResearchBudget.BL
             if (request.Amount <= 0)
                 throw new ArgumentException("סכום התשלום חייב להיות גדול מאפס");
 
-            return _paymentRequestsDal.CreatePaymentRequest(request);
+            int newId = _paymentRequestsDal.CreatePaymentRequest(request);
+            if (newId <= 0)
+                throw new Exception("יצירת בקשת התשלום נכשלה במסד הנתונים");
+
+            return newId;
         }
 
         public List<PaymentRequestWithDetails> GetPaymentRequestsByResearch(int researchId)

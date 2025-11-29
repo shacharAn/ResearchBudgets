@@ -18,7 +18,12 @@ namespace RuppinResearchBudget.BL
             if (researchId <= 0)
                 throw new ArgumentException("מספר מחקר אינו חוקי");
 
-            return _detailsDal.GetResearchBudgetDetails(researchId);
+            var details = _detailsDal.GetResearchBudgetDetails(researchId);
+            if (details == null || details.ResearchId == 0)
+                throw new Exception("לא נמצאו פרטי תקציב למחקר שביקשת");
+
+            return details;
         }
+
     }
 }

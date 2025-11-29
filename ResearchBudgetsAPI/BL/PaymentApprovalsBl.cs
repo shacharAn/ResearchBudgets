@@ -4,7 +4,7 @@ using RuppinResearchBudget.Models;
 
 namespace RuppinResearchBudget.BL
 {
-    public class PaymentApprovalsBl 
+    public class PaymentApprovalsBl
     {
         private readonly PaymentApprovalsDal _paymentApprovalsDal;
 
@@ -13,13 +13,8 @@ namespace RuppinResearchBudget.BL
             _paymentApprovalsDal = new PaymentApprovalsDal();
         }
 
-        public PaymentApprovals CreatePaymentApproval(
-            int paymentRequestId,
-            string approvedById,
-            string approvalRole,
-            string status,
-            string? comment)
-        {
+        public PaymentApprovals CreatePaymentApproval(int paymentRequestId, string approvedById,  string approvalRole,string status, string? comment)
+                {
             if (paymentRequestId <= 0)
                 throw new ArgumentException("מספר בקשת תשלום אינו חוקי");
 
@@ -32,8 +27,14 @@ namespace RuppinResearchBudget.BL
             if (string.IsNullOrWhiteSpace(status))
                 throw new ArgumentException("סטטוס האישור הוא שדה חובה");
 
-            return _paymentApprovalsDal.CreatePaymentApproval(
+            var approval = _paymentApprovalsDal.CreatePaymentApproval(
                 paymentRequestId, approvedById, approvalRole, status, comment);
+
+            if (approval == null)
+                throw new Exception("יצירת אישור התשלום נכשלה במסד הנתונים");
+
+            return approval;
         }
+
     }
 }

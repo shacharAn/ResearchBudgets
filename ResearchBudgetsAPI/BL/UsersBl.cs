@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using RuppinResearchBudget.Dal;
 using RuppinResearchBudget.DAL;
 using RuppinResearchBudget.Models;
 
@@ -55,7 +54,13 @@ namespace RuppinResearchBudget.BL
                 LastName = lastName
             };
 
-            return _usersDal.RegisterUser(user);
+            var created = _usersDal.RegisterUser(user);
+            if (created == null)
+            {
+                throw new Exception("נכשלה יצירת המשתמש במערכת");
+            }
+
+            return created;
         }
 
         public Users Login(string userName, string plainPassword)
@@ -80,14 +85,13 @@ namespace RuppinResearchBudget.BL
             if (string.IsNullOrWhiteSpace(userName))
                 throw new ArgumentException("שם משתמש הוא שדה חובה");
 
-            return _usersDal.GetUserWithRoles(userName);
+            var result = _usersDal.GetUserWithRoles(userName);
+            if (result == null)
+                throw new Exception("המשתמש לא נמצא או שאין לו תפקידים במערכת");
 
-            //var result = _usersDal.GetUserWithRoles(userName);
-            //if (result == null)
-            //    throw new Exception("המשתמש לא נמצא או שאין לו תפקידים במערכת");
-
-            //return result;
+            return result;
         }
+
 
         private string HashPassword(string plainPassword)
         {
