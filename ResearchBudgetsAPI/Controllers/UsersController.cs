@@ -46,7 +46,6 @@ namespace RuppinResearchBudget.API.Controllers
 
             try
             {
-                // 👇 כאן אני קורא ל-BL שלך *בדיוק* עם החתימה הקיימת
                 Users user = _usersBl.RegisterUser(
                     request.IdNumber,
                     request.UserName,
@@ -57,16 +56,14 @@ namespace RuppinResearchBudget.API.Controllers
                     request.LastName
                 );
 
-                return Ok(user); // יחזור אובייקט Users כפי ש-DAL מחזיר
+                return Ok(user);
             }
             catch (ArgumentException ex)
             {
-                // שגיאות ולידציה (כמו ת"ז לא תקינה, סיסמה קצרה וכו')
                 return BadRequest(new { message = ex.Message });
             }
             catch (Exception ex)
             {
-                // שגיאות כלליות (משתמש לא פעיל, שם משתמש תפוס, בעיות DB וכו')
                 return BadRequest(new { message = ex.Message });
             }
         }
@@ -101,11 +98,7 @@ namespace RuppinResearchBudget.API.Controllers
         {
             try
             {
-                UserWithRoles result = _usersBl.GetUserWithRoles(userName);
-
-                if (result == null)
-                    return NotFound(new { message = "המשתמש לא נמצא או שאין לו תפקידים" });
-
+                var result = _usersBl.GetUserWithRoles(userName);
                 return Ok(result);
             }
             catch (ArgumentException ex)
@@ -114,8 +107,9 @@ namespace RuppinResearchBudget.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message });
+                return NotFound(new { message = ex.Message });
             }
         }
+
     }
 }

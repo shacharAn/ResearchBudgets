@@ -11,7 +11,6 @@ namespace RuppinResearchBudget.API.Controllers
     public class PaymentApprovalsController : ControllerBase
     {
         private readonly PaymentApprovalsBl _approvalsBl = new PaymentApprovalsBl();
-
         public class CreatePaymentApprovalRequest
         {
             [Required]
@@ -22,7 +21,6 @@ namespace RuppinResearchBudget.API.Controllers
             public string ApprovalRole { get; set; }
             [Required]
             public string Status { get; set; }
-            [Required]
             public string? Comment { get; set; }
         }
 

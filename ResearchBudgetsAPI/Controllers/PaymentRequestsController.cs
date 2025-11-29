@@ -41,8 +41,7 @@ namespace RuppinResearchBudget.API.Controllers
         {
             try
             {
-                List<PaymentRequestWithDetails> list =
-                    _paymentRequestsBl.GetPaymentRequestsByResearch(researchId);
+                List<PaymentRequestWithDetails> list = _paymentRequestsBl.GetPaymentRequestsByResearch(researchId);
 
                 return Ok(list);
             }
@@ -62,8 +61,7 @@ namespace RuppinResearchBudget.API.Controllers
         {
             try
             {
-                List<PaymentRequestWithDetails> list =
-                    _paymentRequestsBl.GetPaymentRequestsByUser(requestedById);
+                List<PaymentRequestWithDetails> list = _paymentRequestsBl.GetPaymentRequestsByUser(requestedById);
 
                 return Ok(list);
             }

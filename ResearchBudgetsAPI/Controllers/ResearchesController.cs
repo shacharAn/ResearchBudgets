@@ -40,11 +40,7 @@ namespace RuppinResearchBudget.API.Controllers
         {
             try
             {
-                Researches research = _researchesBl.GetResearchById(id);
-
-                if (research == null)
-                    return NotFound(new { message = "המחקר לא נמצא" });
-
+                var research = _researchesBl.GetResearchById(id);
                 return Ok(research);
             }
             catch (ArgumentException ex)
@@ -53,9 +49,10 @@ namespace RuppinResearchBudget.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message });
+                return NotFound(new { message = ex.Message });
             }
         }
+
 
         // GET: api/researches/by-user/{idNumber}
         [HttpGet("by-user/{idNumber}")]

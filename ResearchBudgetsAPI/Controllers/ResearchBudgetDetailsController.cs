@@ -19,9 +19,6 @@ namespace RuppinResearchBudget.API.Controllers
             {
                 ResearchBudgetDetails details = _budgetBl.GetResearchBudgetDetails(researchId);
 
-                if (details == null)
-                    return NotFound(new { message = "לא נמצא מידע תקציבי למחקר המבוקש" });
-
                 return Ok(details);
             }
             catch (ArgumentException ex)
