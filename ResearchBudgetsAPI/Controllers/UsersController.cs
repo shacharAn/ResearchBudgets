@@ -1,0 +1,121 @@
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
+using RuppinResearchBudget.BL;
+using RuppinResearchBudget.Models;
+using System.ComponentModel.DataAnnotations;
+
+namespace RuppinResearchBudget.API.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class UsersController : ControllerBase
+    {
+        private readonly UsersBl _usersBl = new UsersBl();
+
+        public class RegisterUserRequest
+        {
+            [Required]
+            public string IdNumber { get; set; }
+            [Required]
+            public string UserName { get; set; }
+            [Required]
+            public string Email { get; set; }
+            [Required]
+            public string Password { get; set; }
+            [Required]
+            public string ConfirmPassword { get; set; }
+            [Required]
+            public string FirstName { get; set; }
+            [Required]
+            public string LastName { get; set; }
+        }
+        public class LoginRequest
+        {
+            [Required]
+            public string UserName { get; set; }
+            [Required]
+            public string Password { get; set; }
+        }
+
+        // POST: api/users/register
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] RegisterUserRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                // 👇 כאן אני קורא ל-BL שלך *בדיוק* עם החתימה הקיימת
+                Users user = _usersBl.RegisterUser(
+                    request.IdNumber,
+                    request.UserName,
+                    request.Email,
+                    request.Password,
+                    request.ConfirmPassword,
+                    request.FirstName,
+                    request.LastName
+                );
+
+                return Ok(user); // יחזור אובייקט Users כפי ש-DAL מחזיר
+            }
+            catch (ArgumentException ex)
+            {
+                // שגיאות ולידציה (כמו ת"ז לא תקינה, סיסמה קצרה וכו')
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                // שגיאות כלליות (משתמש לא פעיל, שם משתמש תפוס, בעיות DB וכו')
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        // POST: api/users/login
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] LoginRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                // 👇 שוב – בדיוק החתימה שלך ב-BL
+                Users user = _usersBl.Login(request.UserName, request.Password);
+                return Ok(user);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                // כאן גם ההודעה "שם משתמש או סיסמה שגויים" וגם "המשתמש אינו פעיל"
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        // GET: api/users/{userName}/roles
+        [HttpGet("{userName}/roles")]
+        public IActionResult GetUserWithRoles(string userName)
+        {
+            try
+            {
+                UserWithRoles result = _usersBl.GetUserWithRoles(userName);
+
+                if (result == null)
+                    return NotFound(new { message = "המשתמש לא נמצא או שאין לו תפקידים" });
+
+                return Ok(result);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+    }
+}
