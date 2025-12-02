@@ -1,6 +1,6 @@
 // Client/JS/paymentApprovalsApi.js
-
-const BASE_URL = "https://localhost:7097/api/paymentapprovals";
+import { API_BASE } from "./config.js";
+const paymentapprovals_BASE_URL = `${API_BASE}/paymentapprovals`;
 
 // יצירת אישור תשלום (עבור גורם מאשר)
 export async function createPaymentApproval(approvalData) {

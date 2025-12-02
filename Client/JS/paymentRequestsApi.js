@@ -1,6 +1,6 @@
 // Client/JS/paymentRequestsApi.js
-
-const BASE_URL = "https://localhost:7097/api/paymentrequests";
+import { API_BASE } from "./config.js";
+const paymentrequests_BASE_URL = `${API_BASE}/paymentrequests`;
 
 // יצירת בקשת תשלום חדשה
 export async function createPaymentRequest(requestData) {

@@ -1,10 +1,12 @@
+import { API_BASE } from "./config.js";
+
 export async function uploadFileForResearch(researchId, uploadedById, file) {
     const formData = new FormData();
     formData.append("ResearchId", researchId);
     formData.append("UploadedById", uploadedById);
     formData.append("File", file);  
 
-    const res = await fetch("https://localhost:7097/api/Files/upload", {
+    const res = await fetch(`${API_BASE}/Files/upload`, {
         method: "POST",
         body: formData
     });

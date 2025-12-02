@@ -1,6 +1,7 @@
 // Client/JS/usersApi.js
 
-const BASE_URL = "https://localhost:7097/api/users";
+import { API_BASE } from "./config.js";
+const USERS_BASE_URL = `${API_BASE}/users`;
 
 //  REGISTER 
 export async function registerUser(userData) {

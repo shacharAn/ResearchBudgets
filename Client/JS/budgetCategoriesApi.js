@@ -1,6 +1,6 @@
 // Client/JS/budgetCategoriesApi.js
-
-const BASE_URL = "https://localhost:7097/api/budgetcategories";
+import { API_BASE } from "./config.js";
+const budgetcategories_BASE_URL = `${API_BASE}/budgetcategories`;
 
 export async function getAllBudgetCategories() {
     const res = await fetch(BASE_URL);

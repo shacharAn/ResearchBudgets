@@ -1,6 +1,6 @@
 // Client/JS/researchBudgetDetailsApi.js
-
-const BASE_URL = "https://localhost:7097/api/ResearchBudgetDetails";
+import { API_BASE } from "./config.js";
+const ResearchBudgetDetails_BASE_URL = `${API_BASE}/ResearchBudgetDetails`;
 
 // מביא פרטי תקציב למחקר לפי researchId
 export async function getResearchBudgetDetails(researchId) {
