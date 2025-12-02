@@ -50,5 +50,31 @@ namespace RuppinResearchBudget.BL
 
             return _paymentRequestsDal.GetPaymentRequestsByUser(requestedById);
         }
+        public void DeletePaymentRequest(int paymentRequestId)
+        {
+            if (paymentRequestId <= 0)
+                throw new ArgumentException("מספר בקשה אינו חוקי");
+
+            bool ok = _paymentRequestsDal.DeletePaymentRequest(paymentRequestId);
+            if (!ok)
+                throw new Exception("בקשת התשלום לא נמצאה או שלא נמחקה");
+        }
+        public void UpdatePaymentRequest(PaymentRequests request)
+        {
+            if (request.PaymentRequestId <= 0)
+                throw new ArgumentException("מספר בקשה אינו חוקי");
+
+            if (request.CategoryId <= 0)
+                throw new ArgumentException("קטגוריית תקציב היא שדה חובה");
+
+            if (request.Amount <= 0)
+                throw new ArgumentException("סכום התשלום חייב להיות גדול מאפס");
+
+            // (לא מאפשרים כאן לשנות ResearchId/RequestedById)
+            bool ok = _paymentRequestsDal.UpdatePaymentRequest(request);
+            if (!ok)
+                throw new Exception("לא ניתן לעדכן את הבקשה (אולי כבר אינה Pending)");
+        }
+
     }
 }

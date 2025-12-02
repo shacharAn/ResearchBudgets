@@ -117,6 +117,9 @@
 
         public string RequestedByFirstName { get; set; } = string.Empty;
         public string RequestedByLastName { get; set; } = string.Empty;
+        public string? FileOriginalName { get; set; }
+        //public string? FileStoredName { get; set; }
+        public string? FileRelativePath { get; set; }
 
     }
 
@@ -153,6 +156,9 @@
         public int? FileId { get; set; }
         public string CategoryName { get; set; } = string.Empty;
         public string RequestedBy { get; set; } = string.Empty;
+        public string? FileOriginalName { get; set; }
+        public string? FileRelativePath { get; set; }
+
     }
 }
 

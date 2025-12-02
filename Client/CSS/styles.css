@@ -1,0 +1,139 @@
+/* בסיס כללי */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    direction: rtl;
+    margin: 0;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+/* בר עליון */
+.top-bar {
+    background-color: #0054a6;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-bar .logo {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.top-bar nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.top-bar nav a:hover {
+    text-decoration: underline;
+}
+
+/* מיכל מרכזי */
+.page-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+/* כותרות */
+.page-container h1,
+.page-container h2,
+.page-container h3 {
+    margin-top: 0;
+}
+
+/* טפסים */
+.form-row {
+    margin-bottom: 15px;
+}
+
+.form-row label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-row textarea {
+    min-height: 70px;
+}
+
+/* כפתורים */
+button,
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #0078ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+button:hover,
+.btn:hover {
+    background-color: #005fcc;
+}
+
+/* טבלאות */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: right;
+}
+
+table th {
+    background-color: #f0f3f7;
+}
+
+/* הודעות */
+.error {
+    color: #d9534f;
+    margin-top: 10px;
+}
+
+.success {
+    color: #28a745;
+    margin-top: 10px;
+}
+
+/* אזור קטן להודעות */
+.messages {
+    margin-top: 10px;
+}
+
+/* קופסה קטנה (לכרטיס מידע) */
+.card {
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    background-color: #fafafa;
+}

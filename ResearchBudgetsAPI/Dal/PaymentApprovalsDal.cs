@@ -7,7 +7,6 @@ namespace RuppinResearchBudget.DAL
 {
     public class PaymentApprovalsDal : DBServices
     {
-
         public PaymentApprovals CreatePaymentApproval(
             int paymentRequestId,
             string approvedById,

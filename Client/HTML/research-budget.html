@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>תקציב מחקר</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+</head>
+<body>
+
+<header class="main-header">
+    <h1 id="research-title">פירוט תקציבי המחקר</h1>
+</header>
+
+<main class="card">
+    <div id="budget-error" class="error-message"></div>
+
+    <section id="budget-summary">
+    </section>
+
+    <h2>הוצאות מאושרות</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>קטגוריה</th>
+                <th>סה"כ הוצאות בקטגוריה</th>
+            </tr>
+        </thead>
+        <tbody id="budget-categories-table"></tbody>
+    </table>
+
+    <h2>בקשות תשלום במחקר</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>מס' בקשה</th>
+                <th>תאריך</th>
+                <th>סכום</th>
+                <th>קטגוריה</th>
+                <th>מבקש</th>
+                <th>סטטוס</th>
+                <th>תיאור</th>
+                <th>קובץ מצורף</th>
+                <th>פעולות</th>
+            </tr>
+        </thead>
+        <tbody id="budget-requests-table"></tbody>
+    </table>
+
+    <div class="form-footer">
+        <a href="my-researches.html" class="link">חזרה למחקרים שלי</a>
+    </div>
+</main>
+
+<script type="module" src="../JS/index.js"></script>
+</body>
+</html>

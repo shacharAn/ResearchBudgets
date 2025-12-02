@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>הרשמה - ניהול תקציבי מחקר</title>
+    <link rel="stylesheet" href="../CSS/styles.css" />
+</head>
+<body>
+<header class="main-header">
+    <h1>הרשמה למערכת ניהול תקציבי מחקר</h1>
+</header>
+
+<main class="card">
+    <form id="register-form" class="form">
+        <div class="form-group">
+            <label for="reg-id">תעודת זהות (9 ספרות):</label>
+            <input type="text" id="reg-id" maxlength="9" required />
+        </div>
+
+        <div class="form-group">
+            <label for="reg-username">שם משתמש (אנגלית):</label>
+            <input type="text" id="reg-username" required />
+        </div>
+
+        <div class="form-group">
+            <label for="reg-email">אימייל:</label>
+            <input type="email" id="reg-email" required />
+        </div>
+
+        <div class="form-group">
+            <label for="reg-firstname">שם פרטי:</label>
+            <input type="text" id="reg-firstname" required />
+        </div>
+
+        <div class="form-group">
+            <label for="reg-lastname">שם משפחה:</label>
+            <input type="text" id="reg-lastname" required />
+        </div>
+
+        <div class="form-group">
+            <label for="reg-password">סיסמה:</label>
+            <input type="password" id="reg-password" required />
+        </div>
+
+        <div class="form-group">
+            <label for="reg-confirm">אישור סיסמה:</label>
+            <input type="password" id="reg-confirm" required />
+        </div>
+
+        <button type="submit" class="btn primary">הרשמה</button>
+        <div id="register-error" class="error-message"></div>
+        <div id="register-success" class="success-message"></div>
+    </form>
+
+    <div class="form-footer">
+        <span>כבר רשומה?</span>
+        <a href="index.html" class="link">חזרה למסך התחברות</a>
+    </div>
+</main>
+
+<script type="module" src="../JS/index.js"></script>
+</body>
+</html>

@@ -19,7 +19,6 @@ namespace RuppinResearchBudget.DAL
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    //  פרטי המחקר
                     if (reader.Read())
                     {
                         result.ResearchId = (int)reader["ResearchId"];
@@ -35,13 +34,18 @@ namespace RuppinResearchBudget.DAL
                         throw new Exception("לא נמצאו נתוני מחקר עבור המזהה שנשלח");
                     }
 
-                    // סך כל ההוצאות המאושרות
-                    if (reader.NextResult() && reader.Read() && reader["TotalApprovedExpenses"] != DBNull.Value)
+                    if (reader.NextResult() && reader.Read())
                     {
-                        result.TotalApprovedExpenses = (decimal)reader["TotalApprovedExpenses"];
+                        if (reader["TotalApprovedExpenses"] != DBNull.Value)
+                        {
+                            result.TotalApprovedExpenses = (decimal)reader["TotalApprovedExpenses"];
+                        }
+                        else
+                        {
+                            result.TotalApprovedExpenses = 0m;
+                        }
                     }
 
-                    // הוצאות לפי קטגוריה
                     if (reader.NextResult())
                     {
                         while (reader.Read())
@@ -55,7 +59,6 @@ namespace RuppinResearchBudget.DAL
                         }
                     }
 
-                    // פירוט מלא של כל הבקשות
                     if (reader.NextResult())
                     {
                         while (reader.Read())
@@ -74,7 +77,6 @@ namespace RuppinResearchBudget.DAL
                         }
                     }
 
-                    // יתרת תקציב
                     if (reader.NextResult() && reader.Read())
                     {
                         result.RemainingBudget = (decimal)reader["RemainingBudget"];

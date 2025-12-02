@@ -62,12 +62,19 @@ namespace RuppinResearchBudget.DAL
                             Status = reader["Status"].ToString(),
                             CategoryName = reader["CategoryName"].ToString(),
                             RequestedByFirstName = reader["FirstName"].ToString(),
-                            RequestedByLastName = reader["LastName"].ToString()
+                            RequestedByLastName = reader["LastName"].ToString(),
+                            //FileOriginalName = reader["FileOriginalName"] == DBNull.Value
+                            //   ? null
+                            //   : reader["FileOriginalName"].ToString(),
+                            //FileRelativePath = reader["FileRelativePath"] == DBNull.Value
+                            //   ? null
+                            //   : reader["FileRelativePath"].ToString()
+                            FileOriginalName = reader["FileOriginalName"] as string,
+                            FileRelativePath = reader["FileRelativePath"] as string
                         });
                     }
                 }
             }
-
             return list;
         }
 
@@ -97,13 +104,51 @@ namespace RuppinResearchBudget.DAL
                             RequestDate = (DateTime)reader["RequestDate"],
                             Description = reader["Description"] == DBNull.Value ? null : reader["Description"].ToString(),
                             FileId = reader["FileId"] == DBNull.Value ? (int?)null : (int)reader["FileId"],
-                            Status = reader["Status"].ToString()
+                            Status = reader["Status"].ToString(),
+                            //FileOriginalName = reader["FileOriginalName"] == DBNull.Value
+                            //   ? null
+                            //   : reader["FileOriginalName"].ToString(),
+                            //FileRelativePath = reader["FileRelativePath"] == DBNull.Value
+                            //   ? null
+                            //   : reader["FileRelativePath"].ToString()
+                            FileOriginalName = reader["FileOriginalName"] as string,
+                            FileRelativePath = reader["FileRelativePath"] as string
                         });
                     }
                 }
             }
-
             return list;
+        }
+        public bool DeletePaymentRequest(int paymentRequestId)
+        {
+            using (SqlConnection conn = connect("DefaultConnection"))
+            using (SqlCommand cmd = new SqlCommand("spDeletePaymentRequestIfPending", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@PaymentRequestId", paymentRequestId);
+
+                int rows = cmd.ExecuteNonQuery();
+                return rows > 0;
+            }
+        }
+        public bool UpdatePaymentRequest(PaymentRequests request)
+        {
+            using (SqlConnection conn = connect("DefaultConnection"))
+            using (SqlCommand cmd = new SqlCommand("spUpdatePaymentRequestIfPending", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@PaymentRequestId", request.PaymentRequestId);
+                cmd.Parameters.AddWithValue("@CategoryId", request.CategoryId);
+                cmd.Parameters.AddWithValue("@Amount", request.Amount);
+                cmd.Parameters.AddWithValue("@Description",
+                    string.IsNullOrEmpty(request.Description) ? (object)DBNull.Value : request.Description);
+                cmd.Parameters.AddWithValue("@FileId",
+                    request.FileId.HasValue ? (object)request.FileId.Value : DBNull.Value);
+
+                int rows = cmd.ExecuteNonQuery();
+                return rows > 0;
+            }
         }
     }
 }

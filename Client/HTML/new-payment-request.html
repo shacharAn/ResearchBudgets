@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>בקשת תשלום חדשה</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+</head>
+<body>
+
+<header class="main-header">
+    <h1>בקשת תשלום חדשה</h1>
+</header>
+
+<main class="card">
+    <form id="payment-request-form" class="form">
+        <div class="form-group">
+            <label for="pr-research-id">מספר מחקר:</label>
+            <select id="pr-research-id" required>
+                <option value="">בחר מחקר</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="pr-category-id">קטגוריית תקציב:</label>
+            <select id="pr-category-id" required>
+                <option value="">בחר קטגוריה</option>
+            </select>
+        </div>
+
+        <div id="pr-new-category-section" class="form-group" style="display:none">
+            <label for="pr-new-category-name">קטגוריה חדשה:</label>
+            <input type="text" id="pr-new-category-name" />
+
+            <label for="pr-new-category-desc">תיאור קטגוריה:</label>
+            <textarea id="pr-new-category-desc" rows="2"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="pr-amount">סכום (₪):</label>
+            <input type="number" step="0.01" id="pr-amount" required />
+        </div>
+
+        <div class="form-group">
+            <label for="pr-file">קובץ הצעת מחיר (לא חובה):</label>
+            <input type="file" id="pr-file"
+                accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx" />
+        </div>
+
+        <div class="form-group">
+            <label for="pr-Description">תיאור הבקשה (לא חובה):</label>
+            <textarea id="pr-Description" rows="1"></textarea>
+        </div>
+        <button type="submit" class="btn primary">שמור בקשה</button>
+
+        <div id="pr-error" class="error-message"></div>
+        <div id="pr-success" class="success-message"></div>
+    </form>
+
+    <div class="form-footer">
+        <a href="my-researches.html" class="link">חזרה למחקרים</a>
+    </div>
+</main>
+
+<script type="module" src="../JS/index.js"></script>
+</body>
+</html>

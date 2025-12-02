@@ -74,5 +74,49 @@ namespace RuppinResearchBudget.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+        // PUT: api/paymentrequests/{id}
+        [HttpPut("{id:int}")]
+        public IActionResult Update(int id, [FromBody] PaymentRequests request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (id != request.PaymentRequestId)
+                return BadRequest(new { message = "אי התאמה בין מזהה הבקשה לנתיב ה-URL" });
+
+            try
+            {
+                _paymentRequestsBl.UpdatePaymentRequest(request);
+                return Ok(new { message = "בקשת התשלום עודכנה בהצלחה" });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        // DELETE: api/paymentrequests/{id}
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _paymentRequestsBl.DeletePaymentRequest(id);
+                return Ok(new { message = "בקשת התשלום נמחקה בהצלחה" });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
     }
 }

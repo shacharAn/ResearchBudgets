@@ -1,0 +1,6 @@
+@ResearchBudgetsAPI_HostAddress = http://localhost:5087
+
+GET {{ResearchBudgetsAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

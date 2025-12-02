@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>התחברות - ניהול תקציבי מחקר</title>
+    <link rel="stylesheet" href="../CSS/styles.css" />
+</head>
+<body>
+<header class="main-header">
+    <h1>התחברות למערכת ניהול תקציבי מחקר</h1>
+</header>
+
+<main class="card">
+    <form id="login-form" class="form">
+        <div class="form-group">
+            <label for="login-username">שם משתמש:</label>
+            <input type="text" id="login-username" required />
+        </div>
+        <div class="form-group">
+            <label for="login-password">סיסמה:</label>
+            <input type="password" id="login-password" required />
+        </div>
+        <button type="submit" class="btn primary">התחבר</button>
+        <div id="login-error" class="error-message"></div>
+    </form>
+
+    <div class="form-footer">
+        <span>עדיין לא רשומה?</span>
+        <a href="register.html" class="link">לחץ כאן להרשמה</a>
+    </div>
+</main>
+
+<script type="module" src="../JS/index.js"></script>
+</body>
+</html>

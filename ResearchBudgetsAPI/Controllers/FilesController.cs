@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RuppinResearchBudget.BL;
 using RuppinResearchBudget.Models;
-
+using Microsoft.AspNetCore.Hosting;
 
 namespace RuppinResearchBudget.API.Controllers
 {
@@ -14,51 +14,65 @@ namespace RuppinResearchBudget.API.Controllers
     public class FilesController : ControllerBase
     {
         private readonly FilesBl _filesBl = new FilesBl();
+        private readonly IWebHostEnvironment _env;
 
-        // POST: api/files
-        [HttpPost("upload")]
-        public async Task<IActionResult> Upload([FromForm] IFormFile file, [FromForm] int researchId, [FromForm] string uploadedById)
+        public FilesController(IWebHostEnvironment env)
         {
-            if (file == null || file.Length == 0)
+            _env = env;
+        }
+
+        // DTO שמייצג את הטופס
+        public class UploadFileRequest
+        {
+            public int ResearchId { get; set; }
+            public string UploadedById { get; set; } = string.Empty;
+            public IFormFile File { get; set; } = default!;
+        }
+
+        // POST: api/files/upload
+        [HttpPost("upload")]
+        [Consumes("multipart/form-data")]
+        public IActionResult Upload([FromForm] UploadFileRequest request)
+        {
+            if (request.File == null || request.File.Length == 0)
                 return BadRequest(new { message = "לא הועלה קובץ" });
 
             try
             {
-                var uploadsFolder = Path.Combine("wwwroot", "uploads");
+                var webRoot = _env.WebRootPath ?? Path.Combine(_env.ContentRootPath, "wwwroot");
+                string uploadsFolder = Path.Combine(webRoot, "uploads");
                 Directory.CreateDirectory(uploadsFolder);
 
-                var storedFileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-                var fullPath = Path.Combine(uploadsFolder, storedFileName);
+                string extension = Path.GetExtension(request.File.FileName);
+                string storedFileName = $"{Guid.NewGuid()}{extension}";
+                string physicalPath = Path.Combine(uploadsFolder, storedFileName);
 
-                using (var stream = new FileStream(fullPath, FileMode.Create))
+                using (var stream = System.IO.File.Create(physicalPath))
                 {
-                    await file.CopyToAsync(stream);
+                    request.File.CopyTo(stream);
                 }
 
+                string relativePath = $"uploads/{storedFileName}";
+
+                // 2. שורה בטבלת Files
                 var fileModel = new Files
                 {
-                    ResearchId = researchId,
-                    OriginalFileName = file.FileName,
+                    ResearchId = request.ResearchId,
+                    OriginalFileName = request.File.FileName,
                     StoredFileName = storedFileName,
-                    RelativePath = Path.Combine("uploads", storedFileName),
-                    ContentType = file.ContentType,
-                    UploadedById = uploadedById,
+                    RelativePath = relativePath,
+                    ContentType = request.File.ContentType,
+                    UploadedById = request.UploadedById,
                     UploadedAt = DateTime.Now
                 };
 
-                int newId = _filesBl.AddFile(fileModel);
-
-                return Ok(new { FileId = newId, Path = fileModel.RelativePath });
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(new { message = ex.Message });
+                int fileId = _filesBl.AddFile(fileModel);
+                return Ok(new { FileId = fileId });
             }
             catch (Exception ex)
             {
                 return BadRequest(new { message = ex.Message });
             }
         }
-
     }
 }
