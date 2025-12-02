@@ -18,4 +18,3 @@ export async function getMyResearches(idNumber) {
     return res.json();
 }
 
-console.log("researchesApi.js loaded! BASE_URL =", BASE_URL);

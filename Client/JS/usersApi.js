@@ -5,8 +5,6 @@ const BASE_URL = `${API_BASE}/users`;
 
 //  REGISTER 
 export async function registerUser(userData) {
-    console.log("sending register:", userData);
-
     const res = await fetch(`${BASE_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -27,8 +25,6 @@ export async function registerUser(userData) {
 
 //  LOGIN 
 export async function login(userName, password) {
-    console.log("sending login:", { userName, password });
-
     const res = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -47,7 +43,6 @@ export async function login(userName, password) {
     return res.json();
 }
 
-//  GET USER WITH ROLES 
 export async function getUserWithRoles(userName) {
     const res = await fetch(`${BASE_URL}/${encodeURIComponent(userName)}/roles`);
 
@@ -63,4 +58,3 @@ export async function getUserWithRoles(userName) {
     return res.json();
 }
 
-console.log("usersApi.js loaded! BASE_URL =", BASE_URL);

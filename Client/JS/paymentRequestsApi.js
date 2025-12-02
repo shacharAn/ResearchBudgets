@@ -19,10 +19,10 @@ export async function createPaymentRequest(requestData) {
         throw new Error(msg);
     }
 
-    return res.json(); // מחזיר { paymentRequestId: ... }
+    return res.json(); 
 }
 
-// (לא חובה, אבל שימושי) – כל הבקשות לפי מחקר
+// כל הבקשות לפי מחקר
 export async function getPaymentRequestsByResearch(researchId) {
     const res = await fetch(`${BASE_URL}/by-research/${encodeURIComponent(researchId)}`);
 
@@ -38,7 +38,7 @@ export async function getPaymentRequestsByResearch(researchId) {
     return res.json();
 }
 
-// (לא חובה, אבל שימושי) – כל הבקשות של משתמש
+//  כל הבקשות של משתמש
 export async function getPaymentRequestsByUser(requestedById) {
     const res = await fetch(`${BASE_URL}/by-user/${encodeURIComponent(requestedById)}`);
 
@@ -86,4 +86,3 @@ export async function updatePaymentRequest(id, data) {
     }
 }
 
-console.log("paymentRequestsApi.js loaded! BASE_URL =", BASE_URL);

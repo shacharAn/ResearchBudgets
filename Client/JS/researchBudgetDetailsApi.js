@@ -18,4 +18,3 @@ export async function getResearchBudgetDetails(researchId) {
     return res.json();
 }
 
-console.log("researchBudgetDetailsApi.js loaded! BASE_URL =", BASE_URL);

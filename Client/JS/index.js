@@ -11,7 +11,6 @@ import {
     deletePaymentRequest,
     updatePaymentRequest
 } from "./paymentRequestsApi.js";
-import { createPaymentApproval } from "./paymentApprovalsApi.js";
 import { getAllBudgetCategories, createBudgetCategory } from "./budgetCategoriesApi.js";
 import { uploadFileForResearch } from "./filesApi.js";
 
@@ -46,12 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
         paymentRequestForm.addEventListener("submit", onPaymentRequestSubmit);
         initNewPaymentRequestPage();
     }
-
-    //  דף אישור תשלום 
-    const approvalForm = document.getElementById("approval-form");
-    if (approvalForm) {
-        approvalForm.addEventListener("submit", onApprovalSubmit);
-    }
     
     const myRequestsTable = document.getElementById("my-payment-requests-table");
     if (myRequestsTable) {
@@ -60,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //  פונקציות עזר 
-
 function getCurrentUser() {
     const json = localStorage.getItem("currentUser");
     if (!json) return null;
@@ -76,7 +68,6 @@ function getUserIdNumber(user) {
 }
 
 //  LOGIN 
-
 async function onLoginSubmit(e) {
     e.preventDefault();
 
@@ -115,7 +106,6 @@ async function onLoginSubmit(e) {
 }
 
 //  REGISTER 
-
 async function onRegisterSubmit(e) {
     e.preventDefault();
 
@@ -168,6 +158,7 @@ async function onRegisterSubmit(e) {
         }
     }
 }
+
 //  עמוד בקשת תשלום חדשה 
 async function initNewPaymentRequestPage() {
     const researchSelect = document.getElementById("pr-research-id");
@@ -175,7 +166,6 @@ async function initNewPaymentRequestPage() {
     const errorDiv = document.getElementById("pr-error");
 
     if (!researchSelect || !categorySelect) {
-        console.warn("new-payment-request: missing selects");
         return;
     }
 
@@ -197,7 +187,6 @@ async function initNewPaymentRequestPage() {
 
     try {
         const researches = await getMyResearches(idNumber);
-        console.log("initNewPaymentRequestPage - researches:", researches);
 
         researchSelect.innerHTML = `<option value="">בחר מחקר</option>`;
 
@@ -254,7 +243,6 @@ async function initNewPaymentRequestPage() {
 }
 
 //  המחקרים שלי 
-
 async function loadMyResearches() {
     const currentUserJson = localStorage.getItem("currentUser");
     if (!currentUserJson) {
@@ -309,7 +297,6 @@ async function loadMyResearches() {
         alert(err.message || "שגיאה בטעינת המחקרים.");
     }
 }
-
 
 //  תקציב מחקר 
 async function loadBudgetDetails() {
@@ -376,7 +363,6 @@ async function loadBudgetDetails() {
         try {
             const requests = await getPaymentRequestsByResearch(researchId);
             budgetRequestsCache = requests; 
-            console.log("budget requests for research", researchId, requests);
 
             requests.forEach(p => {
                 const id =
@@ -535,14 +521,12 @@ async function populateCategoriesForPaymentRequest() {
     const errorDiv = document.getElementById("pr-error");
 
     if (!categorySelect) {
-        console.warn("populateCategoriesForPaymentRequest: לא נמצא pr-category-id בדף");
         return;
     }
     if (errorDiv) errorDiv.textContent = "";
 
     try {
         const categories = await getAllBudgetCategories();
-        console.log("populateCategoriesForPaymentRequest - categories:", categories);
 
         categorySelect.innerHTML = `<option value="">בחר קטגוריה</option>`;
 
@@ -684,69 +668,6 @@ async function onPaymentRequestSubmit(e) {
     }
 }
 
-
-//  יצירת אישור תשלום 
-
-async function onApprovalSubmit(e) {
-    e.preventDefault();
-
-    const currentUser = getCurrentUser();
-    if (!currentUser) {
-        window.location.href = "index.html";
-        return;
-    }
-
-    const paymentRequestIdStr = document.getElementById("pa-request-id").value.trim();
-    const approvalRole        = document.getElementById("pa-role").value.trim();
-    const status              = document.getElementById("pa-status").value.trim();
-    const comment             = document.getElementById("pa-comment").value.trim();
-    const errorDiv            = document.getElementById("pa-error");
-    const successDiv          = document.getElementById("pa-success");
-
-    if (errorDiv) errorDiv.textContent = "";
-    if (successDiv) successDiv.textContent = "";
-
-    if (!paymentRequestIdStr || !approvalRole || !status) {
-        if (errorDiv) errorDiv.textContent = "נא למלא את כל שדות החובה.";
-        return;
-    }
-
-    const paymentRequestId = parseInt(paymentRequestIdStr, 10);
-    const approvedById = getUserIdNumber(currentUser);
-
-    if (!approvedById) {
-        if (errorDiv) errorDiv.textContent = "שגיאה: לא נמצאה תעודת זהות של המשתמש.";
-        return;
-    }
-
-    if (!paymentRequestId || paymentRequestId <= 0) {
-        if (errorDiv) errorDiv.textContent = "מספר בקשת התשלום אינו חוקי.";
-        return;
-    }
-
-    try {
-        const payload = {
-            paymentRequestId,
-            approvedById,
-            approvalRole,
-            status,
-            comment: comment || null
-        };
-
-        await createPaymentApproval(payload);
-
-        if (successDiv) {
-            successDiv.textContent = "אישור התשלום נשמר בהצלחה.";
-        }
-
-        (e.target).reset();
-    } catch (err) {
-        console.error(err);
-        if (errorDiv) {
-            errorDiv.textContent = err.message || "שגיאה ביצירת אישור תשלום.";
-        }
-    }
-}
 let myPaymentRequestsCache = [];
 async function loadMyPaymentRequests() {
     const currentUserJson = localStorage.getItem("currentUser");
@@ -765,7 +686,7 @@ async function loadMyPaymentRequests() {
 
     try {
         const list = await getPaymentRequestsByUser(requestedById);
-        myPaymentRequestsCache = list; // נשמור בזיכרון
+        myPaymentRequestsCache = list;
 
         const tbody = document.getElementById("my-payment-requests-table");
         tbody.innerHTML = "";

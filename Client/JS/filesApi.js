@@ -21,6 +21,5 @@ export async function uploadFileForResearch(researchId, uploadedById, file) {
     }
 
     const data = await res.json();
-    console.log("upload result:", data);
     return data;
 }

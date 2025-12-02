@@ -38,4 +38,3 @@ export async function createBudgetCategory(categoryName, description) {
     return res.json(); // מחזיר את האובייקט BudgetCategories עם CategoryId חדש
 }
 
-console.log("budgetCategoriesApi.js loaded! BASE_URL =", BASE_URL);
