@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RuppinResearchBudget.BL;
 using RuppinResearchBudget.Models;
 
-namespace RuppinResearchBudget.Controllers
+namespace RuppinResearchBudget.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

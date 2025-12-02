@@ -3,12 +3,10 @@ using System.Data.SqlClient;
 using System.Data;
 using RuppinResearchBudget.DAL;
 
-namespace RuppinResearchBudget.Dal
+namespace RuppinResearchBudget.DAL
 {
     public class BudgetCategoriesDal : DBServices
     {
-        private readonly string _connectionString;
-
         public List<BudgetCategories> GetAllCategories()
         {
             var list = new List<BudgetCategories>();

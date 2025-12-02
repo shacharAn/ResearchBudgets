@@ -36,7 +36,7 @@ namespace RuppinResearchBudget.BL
         }
 
 
-        public Researches? GetResearchById(int researchId)
+        public Researches GetResearchById(int researchId)
         {
             if (researchId <= 0)
                 throw new ArgumentException("מספר מחקר אינו חוקי");

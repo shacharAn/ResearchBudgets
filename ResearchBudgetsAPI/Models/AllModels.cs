@@ -1,4 +1,6 @@
-﻿namespace RuppinResearchBudget.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RuppinResearchBudget.Models
 {
     public class Users
     {
@@ -63,6 +65,8 @@
     public class BudgetCategories
     {
         public int CategoryId { get; set; }
+        [Required(ErrorMessage = "שם קטגוריה הוא שדה חובה")]
+        [StringLength(100, ErrorMessage = "שם הקטגוריה יכול להכיל עד 100 תווים")]
         public string CategoryName { get; set; } = string.Empty;
         public string? Description { get; set; }
     }

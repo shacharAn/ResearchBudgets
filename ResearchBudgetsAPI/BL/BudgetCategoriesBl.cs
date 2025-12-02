@@ -1,4 +1,4 @@
-﻿using RuppinResearchBudget.Dal;
+﻿using RuppinResearchBudget.DAL;
 using RuppinResearchBudget.Models;
 
 namespace RuppinResearchBudget.BL
