@@ -1,6 +1,6 @@
 // Client/JS/paymentRequestsApi.js
 import { API_BASE } from "./config.js";
-const paymentrequests_BASE_URL = `${API_BASE}/paymentrequests`;
+const BASE_URL = `${API_BASE}/paymentrequests`;
 
 // יצירת בקשת תשלום חדשה
 export async function createPaymentRequest(requestData) {

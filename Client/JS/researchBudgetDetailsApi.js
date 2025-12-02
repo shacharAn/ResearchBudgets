@@ -1,6 +1,6 @@
 // Client/JS/researchBudgetDetailsApi.js
 import { API_BASE } from "./config.js";
-const ResearchBudgetDetails_BASE_URL = `${API_BASE}/ResearchBudgetDetails`;
+const BASE_URL = `${API_BASE}/ResearchBudgetDetails`;
 
 // מביא פרטי תקציב למחקר לפי researchId
 export async function getResearchBudgetDetails(researchId) {

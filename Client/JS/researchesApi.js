@@ -1,6 +1,6 @@
 // Client/JS/researchesApi.js
 import { API_BASE } from "./config.js";
-const researches_BASE_URL = `${API_BASE}/researches`;
+const BASE_URL = `${API_BASE}/researches`;
 
 // מביא את כל המחקרים לפי תעודת זהות 
 export async function getMyResearches(idNumber) {
