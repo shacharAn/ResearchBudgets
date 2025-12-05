@@ -42,14 +42,14 @@ namespace RuppinResearchBudget.BL
             if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
                 throw new ArgumentException("שם פרטי ושם משפחה הם שדות חובה");
 
-            string hash = HashPassword(plainPassword);
+            //string hash = HashPassword(plainPassword);
 
             var user = new Users
             {
                 IdNumber = idNumber,
                 UserName = userName,
                 Email = email,
-                PasswordHash = hash,
+                PasswordHash = plainPassword,
                 FirstName = firstName,
                 LastName = lastName
             };
@@ -59,7 +59,6 @@ namespace RuppinResearchBudget.BL
             {
                 throw new Exception("נכשלה יצירת המשתמש במערכת");
             }
-
             return created;
         }
 
@@ -68,8 +67,8 @@ namespace RuppinResearchBudget.BL
             if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(plainPassword))
                 throw new ArgumentException("שם משתמש וסיסמה הם שדות חובה");
 
-            string hash = HashPassword(plainPassword);
-            var user = _usersDal.Login(userName, hash);
+            //string hash = HashPassword(plainPassword);
+            var user = _usersDal.Login(userName, plainPassword);
 
             if (user == null)
                 throw new Exception("שם משתמש או סיסמה שגויים");
@@ -93,14 +92,14 @@ namespace RuppinResearchBudget.BL
         }
 
 
-        private string HashPassword(string plainPassword)
-        {
-            using (var sha = SHA256.Create())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(plainPassword);
-                byte[] hashBytes = sha.ComputeHash(bytes);
-                return Convert.ToBase64String(hashBytes);
-            }
-        }
+        //private string HashPassword(string plainPassword)
+        //{
+        //    using (var sha = SHA256.Create())
+        //    {
+        //        byte[] bytes = Encoding.UTF8.GetBytes(plainPassword);
+        //        byte[] hashBytes = sha.ComputeHash(bytes);
+        //        return Convert.ToBase64String(hashBytes);
+        //    }
+        //}
     }
 }
