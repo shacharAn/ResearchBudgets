@@ -80,7 +80,6 @@ namespace RuppinResearchBudget.Models
         public string RelativePath { get; set; } = string.Empty;
         public string? ContentType { get; set; }
         public string UploadedById { get; set; } = string.Empty;
-        public DateTime UploadedAt { get; set; }
     }
 
     public class PaymentRequests

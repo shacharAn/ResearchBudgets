@@ -31,7 +31,6 @@ namespace RuppinResearchBudget.BL
             };
             int newId = _dal.AddCategory(cat.CategoryName, cat.Description);
             cat.CategoryId = newId;
-
             return cat;
         }
     }

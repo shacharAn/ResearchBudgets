@@ -75,6 +75,5 @@ namespace RuppinResearchBudget.BL
             if (!ok)
                 throw new Exception("לא ניתן לעדכן את הבקשה (אולי כבר אינה Pending)");
         }
-
     }
 }
