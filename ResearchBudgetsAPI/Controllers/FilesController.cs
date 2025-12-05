@@ -52,7 +52,7 @@ namespace RuppinResearchBudget.API.Controllers
                     request.File.CopyTo(stream);
                 }
 
-                string relativePath = $"uploads/{storedFileName}";
+                string relativePath = $"uploads/{storedFileName}".Replace("\\", "/");
 
                 // 2. שורה בטבלת Files
                 var fileModel = new Files
@@ -63,7 +63,6 @@ namespace RuppinResearchBudget.API.Controllers
                     RelativePath = relativePath,
                     ContentType = request.File.ContentType,
                     UploadedById = request.UploadedById,
-                    UploadedAt = DateTime.Now
                 };
 
                 int fileId = _filesBl.AddFile(fileModel);
