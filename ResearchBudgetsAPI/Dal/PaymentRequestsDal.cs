@@ -63,12 +63,6 @@ namespace RuppinResearchBudget.DAL
                             CategoryName = reader["CategoryName"].ToString(),
                             RequestedByFirstName = reader["FirstName"].ToString(),
                             RequestedByLastName = reader["LastName"].ToString(),
-                            //FileOriginalName = reader["FileOriginalName"] == DBNull.Value
-                            //   ? null
-                            //   : reader["FileOriginalName"].ToString(),
-                            //FileRelativePath = reader["FileRelativePath"] == DBNull.Value
-                            //   ? null
-                            //   : reader["FileRelativePath"].ToString()
                             FileOriginalName = reader["FileOriginalName"] as string,
                             FileRelativePath = reader["FileRelativePath"] as string
                         });
@@ -105,12 +99,6 @@ namespace RuppinResearchBudget.DAL
                             Description = reader["Description"] == DBNull.Value ? null : reader["Description"].ToString(),
                             FileId = reader["FileId"] == DBNull.Value ? (int?)null : (int)reader["FileId"],
                             Status = reader["Status"].ToString(),
-                            //FileOriginalName = reader["FileOriginalName"] == DBNull.Value
-                            //   ? null
-                            //   : reader["FileOriginalName"].ToString(),
-                            //FileRelativePath = reader["FileRelativePath"] == DBNull.Value
-                            //   ? null
-                            //   : reader["FileRelativePath"].ToString()
                             FileOriginalName = reader["FileOriginalName"] as string,
                             FileRelativePath = reader["FileRelativePath"] as string
                         });
