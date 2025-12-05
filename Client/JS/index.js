@@ -298,6 +298,7 @@ async function loadMyResearches() {
     }
 }
 
+import { API_BASE } from "./config.js";
 //  תקציב מחקר 
 async function loadBudgetDetails() {
     const currentUserJson = localStorage.getItem("currentUser");
@@ -401,7 +402,7 @@ async function loadBudgetDetails() {
                         fileHref = fileRelativePath;
                     } else {
                         const cleanPath = fileRelativePath.replace(/^\/+/, "");
-                        fileHref = `https://localhost:7097/${cleanPath}`;
+                        fileHref = `${API_BASE.replace("/api", "")}/${cleanPath}`;
                     }
                 }
 
