@@ -56,7 +56,6 @@ namespace RuppinResearchBudget.Models
         public string ResearchRole { get; set; } = string.Empty;
         public bool IsActive { get; set; }
 
-        // Returned by SP
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
@@ -106,7 +105,6 @@ namespace RuppinResearchBudget.Models
         public DateTime ApprovalDate { get; set; }
         public string? Comment { get; set; }
     }
-    //תוצאות של SP:
 
     public class UserWithRoles : Users
     {
@@ -121,7 +119,6 @@ namespace RuppinResearchBudget.Models
         public string RequestedByFirstName { get; set; } = string.Empty;
         public string RequestedByLastName { get; set; } = string.Empty;
         public string? FileOriginalName { get; set; }
-        //public string? FileStoredName { get; set; }
         public string? FileRelativePath { get; set; }
 
     }

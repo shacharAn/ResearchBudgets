@@ -70,7 +70,6 @@ namespace RuppinResearchBudget.BL
             if (request.Amount <= 0)
                 throw new ArgumentException("סכום התשלום חייב להיות גדול מאפס");
 
-            // (לא מאפשרים כאן לשנות ResearchId/RequestedById)
             bool ok = _paymentRequestsDal.UpdatePaymentRequest(request);
             if (!ok)
                 throw new Exception("לא ניתן לעדכן את הבקשה (אולי כבר אינה Pending)");

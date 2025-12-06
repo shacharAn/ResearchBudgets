@@ -42,8 +42,6 @@ namespace RuppinResearchBudget.BL
             if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
                 throw new ArgumentException("שם פרטי ושם משפחה הם שדות חובה");
 
-            //string hash = HashPassword(plainPassword);
-
             var user = new Users
             {
                 IdNumber = idNumber,
@@ -67,7 +65,6 @@ namespace RuppinResearchBudget.BL
             if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(plainPassword))
                 throw new ArgumentException("שם משתמש וסיסמה הם שדות חובה");
 
-            //string hash = HashPassword(plainPassword);
             var user = _usersDal.Login(userName, plainPassword);
 
             if (user == null)
@@ -90,16 +87,5 @@ namespace RuppinResearchBudget.BL
 
             return result;
         }
-
-
-        //private string HashPassword(string plainPassword)
-        //{
-        //    using (var sha = SHA256.Create())
-        //    {
-        //        byte[] bytes = Encoding.UTF8.GetBytes(plainPassword);
-        //        byte[] hashBytes = sha.ComputeHash(bytes);
-        //        return Convert.ToBase64String(hashBytes);
-        //    }
-        //}
     }
 }

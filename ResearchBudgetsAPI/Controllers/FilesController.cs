@@ -20,8 +20,6 @@ namespace RuppinResearchBudget.API.Controllers
         {
             _env = env;
         }
-
-        // DTO שמייצג את הטופס
         public class UploadFileRequest
         {
             public int ResearchId { get; set; }
@@ -54,7 +52,6 @@ namespace RuppinResearchBudget.API.Controllers
 
                 string relativePath = $"uploads/{storedFileName}".Replace("\\", "/");
 
-                // 2. שורה בטבלת Files
                 var fileModel = new Files
                 {
                     ResearchId = request.ResearchId,

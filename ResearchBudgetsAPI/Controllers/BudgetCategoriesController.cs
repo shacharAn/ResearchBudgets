@@ -29,7 +29,6 @@ namespace RuppinResearchBudget.API.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
             try
             {
                 var created = _bl.AddCategory(dto.CategoryName, dto.Description);

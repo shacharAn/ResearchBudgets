@@ -16,7 +16,6 @@ namespace RuppinResearchBudget.BL
         {
             return _dal.GetAllCategories();
         }
-        //יצירת קטגוריה
         public BudgetCategories AddCategory(string categoryName, string? description)
         {
             if (string.IsNullOrWhiteSpace(categoryName))

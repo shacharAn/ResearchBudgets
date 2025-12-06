@@ -77,7 +77,6 @@ namespace RuppinResearchBudget.API.Controllers
 
             try
             {
-                // 👇 שוב – בדיוק החתימה שלך ב-BL
                 Users user = _usersBl.Login(request.UserName, request.Password);
                 return Ok(user);
             }
@@ -87,7 +86,6 @@ namespace RuppinResearchBudget.API.Controllers
             }
             catch (Exception ex)
             {
-                // כאן גם ההודעה "שם משתמש או סיסמה שגויים" וגם "המשתמש אינו פעיל"
                 return BadRequest(new { message = ex.Message });
             }
         }
