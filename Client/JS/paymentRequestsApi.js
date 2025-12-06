@@ -2,7 +2,6 @@
 import { API_BASE } from "./config.js";
 const BASE_URL = `${API_BASE}/paymentrequests`;
 
-// יצירת בקשת תשלום חדשה
 export async function createPaymentRequest(requestData) {
     const res = await fetch(BASE_URL, {
         method: "POST",
@@ -22,7 +21,6 @@ export async function createPaymentRequest(requestData) {
     return res.json(); 
 }
 
-// כל הבקשות לפי מחקר
 export async function getPaymentRequestsByResearch(researchId) {
     const res = await fetch(`${BASE_URL}/by-research/${encodeURIComponent(researchId)}`);
 
@@ -38,7 +36,6 @@ export async function getPaymentRequestsByResearch(researchId) {
     return res.json();
 }
 
-//  כל הבקשות של משתמש
 export async function getPaymentRequestsByUser(requestedById) {
     const res = await fetch(`${BASE_URL}/by-user/${encodeURIComponent(requestedById)}`);
 
@@ -53,7 +50,6 @@ export async function getPaymentRequestsByUser(requestedById) {
 
     return res.json();
 }
-// מחיקת בקשת תשלום
 export async function deletePaymentRequest(id) {
     const res = await fetch(`${BASE_URL}/${id}`, {
         method: "DELETE"
@@ -68,7 +64,6 @@ export async function deletePaymentRequest(id) {
         throw new Error(msg);
     }
 }
-// עדכון בקשת תשלום (רק כש-Pending)
 export async function updatePaymentRequest(id, data) {
     const res = await fetch(`${BASE_URL}/${id}`, {
         method: "PUT",

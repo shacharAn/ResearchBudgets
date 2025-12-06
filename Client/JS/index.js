@@ -15,31 +15,26 @@ import { getAllBudgetCategories, createBudgetCategory } from "./budgetCategories
 import { uploadFileForResearch } from "./filesApi.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    //  התחברות 
     const loginForm = document.getElementById("login-form");
     if (loginForm) {
         loginForm.addEventListener("submit", onLoginSubmit);
     }
 
-    //  הרשמה 
     const registerForm = document.getElementById("register-form");
     if (registerForm) {
         registerForm.addEventListener("submit", onRegisterSubmit);
     }
 
-    //  דף המחקרים שלי 
     const researchesTable = document.getElementById("researches-table");
     if (researchesTable) {
         loadMyResearches();
     }
 
-    //  דף תקציב מחקר 
     const budgetSummary = document.getElementById("budget-summary");
     if (budgetSummary) {
         loadBudgetDetails();
     }
 
-    //  דף יצירת בקשת תשלום 
     const paymentRequestForm = document.getElementById("payment-request-form");
     if (paymentRequestForm) {
         paymentRequestForm.addEventListener("submit", onPaymentRequestSubmit);
@@ -52,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-//  פונקציות עזר 
 function getCurrentUser() {
     const json = localStorage.getItem("currentUser");
     if (!json) return null;
@@ -67,7 +61,6 @@ function getUserIdNumber(user) {
     return user?.idNumber || user?.IdNumber || null;
 }
 
-//  LOGIN 
 async function onLoginSubmit(e) {
     e.preventDefault();
 
@@ -105,7 +98,6 @@ async function onLoginSubmit(e) {
     }
 }
 
-//  REGISTER 
 async function onRegisterSubmit(e) {
     e.preventDefault();
 
@@ -159,7 +151,6 @@ async function onRegisterSubmit(e) {
     }
 }
 
-//  עמוד בקשת תשלום חדשה 
 async function initNewPaymentRequestPage() {
     const researchSelect = document.getElementById("pr-research-id");
     const categorySelect = document.getElementById("pr-category-id");
@@ -242,7 +233,6 @@ async function initNewPaymentRequestPage() {
     }
 }
 
-//  המחקרים שלי 
 async function loadMyResearches() {
     const currentUserJson = localStorage.getItem("currentUser");
     if (!currentUserJson) {
@@ -299,7 +289,6 @@ async function loadMyResearches() {
 }
 
 import { API_BASE } from "./config.js";
-//  תקציב מחקר 
 async function loadBudgetDetails() {
     const currentUserJson = localStorage.getItem("currentUser");
     if (!currentUserJson) {
@@ -516,7 +505,6 @@ async function loadBudgetDetails() {
     }
 }
 
-//  מילוי רשימת קטגוריות בדף בקשת תשלום 
 async function populateCategoriesForPaymentRequest() {
     const categorySelect = document.getElementById("pr-category-id");
     const errorDiv = document.getElementById("pr-error");
@@ -559,7 +547,6 @@ async function populateCategoriesForPaymentRequest() {
     }
 }
 
-//  יצירת בקשת תשלום 
 async function onPaymentRequestSubmit(e) {
     e.preventDefault();
 

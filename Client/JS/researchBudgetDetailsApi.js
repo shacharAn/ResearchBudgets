@@ -2,7 +2,6 @@
 import { API_BASE } from "./config.js";
 const BASE_URL = `${API_BASE}/ResearchBudgetDetails`;
 
-// מביא פרטי תקציב למחקר לפי researchId
 export async function getResearchBudgetDetails(researchId) {
     const res = await fetch(`${BASE_URL}/${encodeURIComponent(researchId)}`);
 

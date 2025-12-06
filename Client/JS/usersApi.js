@@ -3,7 +3,6 @@
 import { API_BASE } from "./config.js";
 const BASE_URL = `${API_BASE}/users`;
 
-//  REGISTER 
 export async function registerUser(userData) {
     const res = await fetch(`${BASE_URL}/register`, {
         method: "POST",
@@ -23,7 +22,6 @@ export async function registerUser(userData) {
     return res.json();
 }
 
-//  LOGIN 
 export async function login(userName, password) {
     const res = await fetch(`${BASE_URL}/login`, {
         method: "POST",

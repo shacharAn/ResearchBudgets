@@ -14,7 +14,7 @@ export async function getAllBudgetCategories() {
         throw new Error(msg);
     }
 
-    return res.json(); // מחזיר מערך של BudgetCategories
+    return res.json(); 
 }
 export async function createBudgetCategory(categoryName, description) {
     const res = await fetch(BASE_URL, {
@@ -35,6 +35,6 @@ export async function createBudgetCategory(categoryName, description) {
         throw new Error(msg);
     }
 
-    return res.json(); // מחזיר את האובייקט BudgetCategories עם CategoryId חדש
+    return res.json(); 
 }
 

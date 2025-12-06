@@ -2,7 +2,6 @@
 import { API_BASE } from "./config.js";
 const BASE_URL = `${API_BASE}/researches`;
 
-// מביא את כל המחקרים לפי תעודת זהות 
 export async function getMyResearches(idNumber) {
     const res = await fetch(`${BASE_URL}/by-user/${encodeURIComponent(idNumber)}`);
 
